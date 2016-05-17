@@ -11,8 +11,8 @@ object ScalaApp {
 
     Simulator setUp {
       new ActivityModel ("M1") {
-        Activity (this) (name="A") (cond=true) {}
-        Activity (this) (name = "B")(cond = true) {}
+        Activity (model=this) (name="A") (cond=true) {}
+        Activity (model=this) (name = "B")(cond = true) {}
       } registerWith Simulator.simScheduler listActivities()
     }
   }
