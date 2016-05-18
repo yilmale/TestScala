@@ -59,7 +59,7 @@ class C(x: Int, cond: => Boolean, body: => Unit) {
   }
 }
 
-def activity (name: => String) (cond: => Boolean)
+def activity (name:  String) (cond: => Boolean)
              (body: => Unit) : C = new C(20,cond,body)
 
 def modelInitialize (body: => Unit) = {body}
@@ -69,3 +69,10 @@ modelInitialize {Model.v1=10; Model.v2=20}
 activity ("A1") (Model.v1==10) {println(Model.v1);println("test");Model.v1=20} execute()
 activity ("A2") (Model.v1==20) {println(Model.v1);println("test1")} execute()
 Simulator.simulate()
+
+class D(myX: Int) {
+  var var1 = myX
+  def init = {println(var1)}
+}
+
+new D(5){var1 = 15} init
