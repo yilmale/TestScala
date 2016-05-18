@@ -1,3 +1,12 @@
+object activity1  {
+  def apply (myV: Int) : Int = myV+1
+}
+
+println(activity1(5))
+
+
+
+
 var xs = List(1,2,3,4)
 println(xs)
 xs foreach println
@@ -54,25 +63,29 @@ class C(x: Int, cond: => Boolean, body: => Unit) {
   def incVal() = a=a+1
   def getVal() : Int = {a}
   def testC() : Int = {y+a}
-  def execute()  =  {
+  def execute() : Unit  =  {
     if (cond) (body) else println("false predicate")
   }
 }
 
-def activity (name:  String) (cond: => Boolean)
+/*def activity (name: => String) (cond: => Boolean)
              (body: => Unit) : C = new C(20,cond,body)
+*/
 
-def modelInitialize (body: => Unit) = {body}
+
+object activity {
+  def apply (name: => String) (cond: => Boolean)
+            (body: => Unit): C = new C(10,cond,body)
+
+}
+
+activity ("A1") (Model.v1==10) {println(Model.v1);println("test");Model.v1=20} execute()
+
+/*def modelInitialize (body: => Unit) = {body}
 var i=0
 
 modelInitialize {Model.v1=10; Model.v2=20}
 activity ("A1") (Model.v1==10) {println(Model.v1);println("test");Model.v1=20} execute()
 activity ("A2") (Model.v1==20) {println(Model.v1);println("test1")} execute()
 Simulator.simulate()
-
-class D(myX: Int) {
-  var var1 = myX
-  def init = {println(var1)}
-}
-
-new D(5){var1 = 15} init
+*/
