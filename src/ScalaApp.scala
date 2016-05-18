@@ -7,13 +7,17 @@ import activitysim._
 object ScalaApp {
 
   def main(args: Array[String]): Unit = {
-    println("Hello, world!")
 
-    Simulator setUp {
-      new ActivityModel ("M1") {
-        Activity (model=this) (name="A") (cond=true) {}
-        Activity (model=this) (name = "B")(cond = true) {}
-      } registerWith Simulator.simScheduler listActivities()
-    }
+    var sim = new Simulator
+    sim.setUp  {
+      new ActivityModel("M1")  {
+        Activity(name = "A1")(cond = true)(() => {
+          println("test")
+        }) registerWith sim.simScheduler
+        Activity(name = "A2")(cond = true)(() => {
+          println("test1")
+        }) registerWith sim.simScheduler
+      }
+    } simulate()
   }
 }

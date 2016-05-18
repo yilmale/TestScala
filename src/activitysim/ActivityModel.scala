@@ -5,8 +5,10 @@ import scala.collection.mutable.ArrayBuffer
 /**
   * Created by yilmaz on 5/17/16.
   */
-class ActivityModel (modelName: String) extends Model {
+class ActivityModel (modelName: String)  extends Model {
   var activityList = ArrayBuffer.empty[Activity]
+
+
   def registerWith(scheduler: Scheduler): ActivityModel = {
     scheduler.setModel(this)
     this
@@ -17,7 +19,14 @@ class ActivityModel (modelName: String) extends Model {
 
   def listActivities()  {
     for (a <- activityList) {
-      println(a.getName())
+      println(a.getName)
     }
   }
+
+  def executeActivities()  {
+    for (a <- activityList) {
+      a.execute()
+    }
+  }
+
 }
