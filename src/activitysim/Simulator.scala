@@ -16,6 +16,7 @@ class Simulator {
 
   def simulate(): Unit = {
     simScheduler.listActivities()
+    simScheduler.executeActivities()
   }
 }
 

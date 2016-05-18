@@ -23,6 +23,10 @@ object ScalaApp {
       println(page.toString())
     }
 
+    var cm = new CognitiveModel {
+
+    }
+
     var hm = new HypothesisModel {
 
     }
@@ -35,12 +39,13 @@ object ScalaApp {
     sim.setUp  {
       new ActivityModel("M1")  {
         Activity(name = "A1")(cond = true)(() => {
-          println("test");
+          println("test")
+          for (a <- dm.page.child) {println(a.mkString)}
         }) registerWith sim.simScheduler
         Activity(name = "A2")(cond = true)(() => {
           println("test1")
         }) registerWith sim.simScheduler
       }
-    }
+    } simulate
   }
 }

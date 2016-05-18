@@ -23,5 +23,11 @@ class Scheduler extends Observer {
     }
   }
 
+  def executeActivities()  {
+    for (a <- activityList) {
+      a.execute()
+    }
+  }
+
 
 }
