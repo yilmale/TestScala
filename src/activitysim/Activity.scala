@@ -3,16 +3,20 @@ package activitysim
 /**
   * Created by yilmaz on 5/17/16.
   */
-class Activity (am: Any, name: String, aCond: Boolean, dm: DataModel, f: (DataModel) => Unit) {
-  am.asInstanceOf[ActivityModel].add(this)
-  println("new activity  included")
-  am.asInstanceOf[ActivityModel].listActivities()
-  def apply() = f(dm)
-  def execute() = if (aCond) f(dm)
-  def getName : String = name
+class Activity (activityName: String, aCond: Boolean, aBehavior: () => Unit) {
+  println("activity " + activityName + " is created")
+  def execute(): Unit = {
+    if (aCond) aBehavior()
+  }
+  def getName : String = activityName
+
+  def registerWith(sch: Scheduler): Unit = {
+    sch.add(this)
+  }
 }
 
+
 object Activity {
-  def apply (am: Any) (name: => String) (cond: => Boolean) (dataModel: DataModel)
-            (body: (DataModel) => Unit) = new Activity(am, name,cond,dataModel, body)
+  def apply(name: String)(cond: => Boolean)
+           (body: () => Unit) = new Activity(name, cond, body)
 }

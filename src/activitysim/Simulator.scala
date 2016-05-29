@@ -5,16 +5,18 @@ package activitysim
   */
 class Simulator {
   var simScheduler: Scheduler = new Scheduler()
-  var aModel : ActivityModel = null
-  def simulate(am: ActivityModel): Unit = {
+  var simModel: Model = null
 
-  }
-  def setUp(body: => Unit) = {
-    body
+  def setUp(am:ActivityModel) : Simulator = {
+    simModel=am
+    simScheduler.setModel(simModel)
+    this
   }
 
-  def modelSetUp(body: => Unit) = {
-    body
+
+  def simulate(): Unit = {
+    simScheduler.listActivities()
+    simScheduler.executeActivities()
   }
 }
 
