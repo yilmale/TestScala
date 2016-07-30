@@ -3,10 +3,14 @@ package activitysim
 /**
   * Created by yilmaz on 5/17/16.
   */
-class Activity (activityName: String, aCond: Boolean, aBehavior: () => Unit) {
+class Activity (activityName: String, aCond: => Boolean, aBehavior: () => Unit) {
   println("activity " + activityName + " is created")
-  def execute(): Unit = {
-    if (aCond) aBehavior()
+  def execute(): Int = {
+    if (aCond) {
+      aBehavior()
+      1
+    }
+    else {-1}
   }
   def getName : String = activityName
 

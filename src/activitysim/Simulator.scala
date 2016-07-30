@@ -7,19 +7,28 @@ class Simulator {
   var simScheduler: Scheduler = new Scheduler()
   var simModel: Model = null
 
-  def setUp(am:ActivityModel) : Simulator = {
-    simModel=am
+
+  def setUp(am: ActivityModel): Simulator = {
+    simModel = am
     simScheduler.setModel(simModel)
     this
   }
 
 
-  def simulate(): Unit = {
+  def simulateUntil(cond: Int): Unit = {
     simScheduler.listActivities()
-    simScheduler.executeActivities()
-  }
-}
+    var vTime: Int = 0
+    var simCond : Boolean = false
+    do {
+      do {
+        simCond=simScheduler.executeActivities()
+      } while (simCond)
+      vTime = vTime + 1
+    } while (vTime <= cond)
 
+  }
+
+}
 
 
 

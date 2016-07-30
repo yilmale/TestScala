@@ -1,6 +1,7 @@
 package activitysim
 
 import scala.collection.mutable.ArrayBuffer
+import scala.util.control._
 
 /**
   * Created by yilmaz on 5/17/16.
@@ -23,10 +24,20 @@ class Scheduler extends Observer {
     }
   }
 
-  def executeActivities()  {
-    for (a <- activityList) {
-      a.execute()
+  def executeActivities() : Boolean = {
+    var satisfiedCond : Int = 0
+    var cond : Boolean = false
+    val loop = new Breaks
+    loop.breakable {
+      for (a <- activityList) {
+        satisfiedCond = a.execute()
+        if (satisfiedCond == 1) {
+          cond = true
+          loop.break
+        }
+      }
     }
+    cond
   }
 
 
