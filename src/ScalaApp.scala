@@ -1,6 +1,5 @@
 import activitysim._
 
-import scala.xml._
 
 /**
   * Created by yilmaz on 5/6/16.
@@ -8,9 +7,7 @@ import scala.xml._
 object ScalaApp {
 
   def main(args: Array[String]): Unit = {
-
-
-
+    
     var sim = new Simulator
     sim.setUp  {
       new ActivityModel("M1")  {

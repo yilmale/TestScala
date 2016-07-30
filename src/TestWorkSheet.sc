@@ -5,8 +5,6 @@ object activity1  {
 println(activity1(5))
 
 
-
-
 var xs = List(1,2,3,4)
 println(xs)
 xs foreach println
