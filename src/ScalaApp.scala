@@ -7,7 +7,12 @@ import activitysim._
 object ScalaApp {
 
   def main(args: Array[String]): Unit = {
-    var y: Int = 5
+    val e:Element = new Element(5)
+    println("The initial value is value is " + e.getVal)
+    testFunction(e)
+    println("The value is " + e.getVal)
+
+    /*    var y: Int = 5
     var sim = new Simulator
     sim.setUp  {
       new ActivityModel("M1")  {
@@ -21,6 +26,12 @@ object ScalaApp {
           y=y+1
         }) registerWith sim.simScheduler
       }
-    } simulateUntil 10
+    } simulateUntil 10*/
+
+
+  }
+
+  def testFunction(a:Element): Unit = {
+    a.update()
   }
 }
